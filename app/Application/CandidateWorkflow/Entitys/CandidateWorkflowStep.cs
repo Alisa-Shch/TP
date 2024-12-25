@@ -2,7 +2,7 @@
 
 namespace Application
 {
-    public class Step
+    public class CandidateWorkflowStep
     {
         public Status Status { get; private set; }
         public string? Description { get; private set; }
@@ -11,7 +11,7 @@ namespace Application
         public DateTime ModifiedDate { get; private set; }
         public int NumberStep { get; }
 
-        public Step(string description, Guid roleId, Guid employeeId, DateTime modifiedDate, int numberStep)
+        public CandidateWorkflowStep(string description, Guid roleId, Guid employeeId, DateTime modifiedDate, int numberStep)
         {
             ArgumentException.ThrowIfNullOrEmpty(nameof(description));
             ArgumentException.ThrowIfNullOrEmpty(nameof(roleId));

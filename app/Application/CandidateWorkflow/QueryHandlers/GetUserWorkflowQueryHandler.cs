@@ -1,6 +1,4 @@
-﻿using Domain;
-
-namespace Application
+﻿namespace Application
 {
     public class GetUserWorkflowQueryHandler : IRequestHandler<GetUserWorkflowsQuery, IReadOnlyCollection<Domain.CandidateWorkflow>>
     {

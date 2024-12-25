@@ -1,3 +1,5 @@
+using Application;
+
 namespace Application.Tests
 {
     [TestFixture]
@@ -22,7 +24,7 @@ namespace Application.Tests
             {
                 new CandidateWorkflow(
                     Guid.NewGuid(),
-                    new List<Step>(),
+                    new List<CandidateWorkflowStep>(),
                     DateTime.Now,
                     new Candidate(Guid.NewGuid(), "Test Candidate"))
             };

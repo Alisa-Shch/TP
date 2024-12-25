@@ -1,11 +1,11 @@
 ﻿namespace Application
 {
-    public class Document
+    public class CandidateDocument
     {
         public string Name { get; }
         public string WorkExperience { get; }
 
-        public Document(string name, string workExperience)
+        public CandidateDocument(string name, string workExperience)
         {
             ArgumentException.ThrowIfNullOrEmpty(nameof(name));
             ArgumentException.ThrowIfNullOrEmpty(nameof(workExperience));

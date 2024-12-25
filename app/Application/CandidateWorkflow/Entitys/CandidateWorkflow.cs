@@ -5,9 +5,9 @@
         public Guid Id { get; }
         public DateTime CreatedAt { get; }
         public Candidate Candidate { get; }
-        public IReadOnlyCollection<Step> Steps { get; }
+        public IReadOnlyCollection<CandidateWorkflowStep> Steps { get; }
 
-        public CandidateWorkflow(Guid id, IReadOnlyCollection<Step> steps, DateTime createdAt, Candidate candidate)
+        public CandidateWorkflow(Guid id, IReadOnlyCollection<CandidateWorkflowStep> steps, DateTime createdAt, Candidate candidate)
         {
             ArgumentException.ThrowIfNullOrEmpty(nameof(id));
             ArgumentException.ThrowIfNullOrEmpty(nameof(steps));

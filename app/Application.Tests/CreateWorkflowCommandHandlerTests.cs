@@ -1,20 +1,21 @@
+using Application;
 using Domain;
 
 namespace Application.Tests
 {
-	[TestFixture]
+    [TestFixture]
 	public class CreateWorkflowCommandHandlerTests
 	{
 		private Mock<IWorkflowTemplateRepository> _workflowTemplateRepositoryMock;
 		private Mock<ICandidateWorkflowRepository> _workflowRepositoryMock;
-		private CreateWorkflowCommandHandler _handler;
+		private CreateCandidateWorkflowCommandHandler _handler;
 
 		[SetUp]
 		public void SetUp()
 		{
 			_workflowTemplateRepositoryMock = new Mock<IWorkflowTemplateRepository>();
 			_workflowRepositoryMock = new Mock<ICandidateWorkflowRepository>();
-			_handler = new CreateWorkflowCommandHandler(_workflowTemplateRepositoryMock.Object, _workflowRepositoryMock.Object);
+			_handler = new CreateCandidateWorkflowCommandHandler(_workflowTemplateRepositoryMock.Object, _workflowRepositoryMock.Object);
 		}
 
 		[Test]
@@ -22,7 +23,7 @@ namespace Application.Tests
 		{
 			var userReferaleId = Guid.NewGuid();
 			var workflowTemplateId = Guid.NewGuid();
-			var document = new Document("Test Document", "5 years experience");
+			var document = new CandidateDocument("Test Document", "5 years experience");
 
 			var workflowTemplate = WorkflowTemplate.Create(
 				"Workflow Name",
@@ -37,7 +38,7 @@ namespace Application.Tests
 				.Setup(repo => repo.Create(It.IsAny<Candidate>(), It.IsAny<CancellationToken>()))
 				.Returns(Task.CompletedTask);
 
-			var command = new CreateWorkflowCommand(userReferaleId, workflowTemplateId, document);
+			var command = new CreateCandidateWorkflowCommand(userReferaleId, workflowTemplateId, document);
 
 			var result = await _handler.Handle(command, CancellationToken.None);
 
@@ -61,13 +62,13 @@ namespace Application.Tests
 		{
 			var userReferaleId = Guid.NewGuid();
 			var workflowTemplateId = Guid.NewGuid();
-			var document = new Document("Test Document", "5 years experience");
+			var document = new CandidateDocument("Test Document", "5 years experience");
 
 			_workflowTemplateRepositoryMock
 				.Setup(repo => repo.GetById(workflowTemplateId, It.IsAny<CancellationToken>()))
 				.ReturnsAsync((WorkflowTemplate)null);
 
-			var command = new CreateWorkflowCommand(userReferaleId, workflowTemplateId, document);
+			var command = new CreateCandidateWorkflowCommand(userReferaleId, workflowTemplateId, document);
 
 			var exception = await Should.ThrowAsync<InvalidOperationException>(() => _handler.Handle(command, CancellationToken.None));
 			exception.Message.ShouldBe("Workflow template not found.");
